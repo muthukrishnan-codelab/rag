@@ -13,7 +13,6 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  // ✅ UPDATED LOGIN FUNCTION (API CALL)
   const handleLogin = async () => {
     setError("");
 
@@ -45,12 +44,10 @@ export default function LoginPage() {
         return;
       }
 
-      // ✅ Store user data (temporary - JWT later)
       localStorage.setItem("token", "demo-token");
       localStorage.setItem("role", data.user.role);
       localStorage.setItem("userEmail", data.user.email);
 
-      // ✅ Redirect after login
       router.push("/workflow-builder");
 
     } catch (err) {
@@ -70,7 +67,6 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-[#0a0a0a] p-4">
       <div className="flex w-full max-w-[1200px] h-[750px] rounded-3xl overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)] border border-white/5">
 
-        {/* LEFT SIDE */}
         <div className="w-1/2 relative flex flex-col justify-center p-16 overflow-hidden bg-[#0f172a]">
           <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-blue-600/20 blur-[120px] rounded-full animate-pulse"></div>
           <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-purple-600/20 blur-[120px] rounded-full animate-pulse delay-700"></div>
@@ -122,7 +118,6 @@ export default function LoginPage() {
           </div>
         </div>
 
-        {/* RIGHT SIDE */}
         <div className="w-1/2 bg-black p-16 text-white flex flex-col justify-center border-l border-white/5">
           <h2 className="text-2xl font-semibold mb-1 text-center">Login</h2>
 
@@ -134,7 +129,6 @@ export default function LoginPage() {
             <p className="text-red-400 text-sm mb-3 text-center">{error}</p>
           )}
 
-          {/* EMAIL */}
           <div className="relative mb-4">
             <Mail className="absolute left-3 top-3 text-gray-400" size={18} />
             <input
@@ -146,7 +140,6 @@ export default function LoginPage() {
             />
           </div>
 
-          {/* PASSWORD */}
           <div className="relative mb-4">
             <Lock className="absolute left-3 top-3 text-gray-400" size={18} />
             <input
@@ -166,7 +159,6 @@ export default function LoginPage() {
             </button>
           </div>
 
-          {/* LOGIN BUTTON */}
           <button
             onClick={handleLogin}
             className="w-full bg-yellow-400 text-black font-semibold py-3 rounded-md hover:bg-yellow-300 active:scale-[0.98] transition-all duration-200"

@@ -1,6 +1,6 @@
 "use client";
 
-import { Search, Code, Brain, Settings, Database, Wand2 } from "lucide-react";
+import { Search, Code, Brain, Settings, Database, Wand2, Plus } from "lucide-react";
 
 type Props = {
   switchToCanvas: () => void;
@@ -9,115 +9,111 @@ type Props = {
 const components = [
   {
     title: "Retriever Node",
-    description:
-      "Fetches and retrieves relevant context from the knowledge base.",
+    description: "Fetches relevant context from your knowledge base.",
     icon: Search,
-    color: "from-blue-500 to-indigo-500",
+    color: "bg-blue-50 text-blue-600",
     type: "retriever",
   },
   {
     title: "Prompt Node",
-    description: "Manages the prompt template used for generating prompts.",
+    description: "Manages templates used for structured generations.",
     icon: Code,
-    color: "from-purple-500 to-indigo-500",
+    color: "bg-purple-50 text-purple-600",
     type: "prompt",
   },
   {
     title: "LLM Node",
-    description:
-      "Uses an LLM for generating responses with retrieved context.",
+    description: "Generates AI responses using retrieved context.",
     icon: Brain,
-    color: "from-indigo-500 to-blue-500",
+    color: "bg-indigo-50 text-indigo-600",
     type: "llm",
   },
   {
-    title: "Post-Processor Node",
-    description:
-      "Formats and processes the output of the LLM generation step.",
+    title: "Post-Processor",
+    description: "Formats and cleans the final output logic.",
     icon: Settings,
-    color: "from-orange-400 to-yellow-500",
+    color: "bg-orange-50 text-orange-600",
     type: "post",
   },
   {
     title: "Vector Database",
-    description:
-      "Stores embeddings and enables semantic search across documents.",
+    description: "Stores embeddings for semantic search flows.",
     icon: Database,
-    color: "from-teal-500 to-cyan-500",
+    color: "bg-teal-50 text-teal-600",
     type: "vector",
   },
   {
     title: "Agent Node",
-    description:
-      "Controls reasoning flow and manages tool interactions.",
+    description: "Controls reasoning and tool interaction logic.",
     icon: Wand2,
-    color: "from-pink-500 to-purple-500",
+    color: "bg-pink-50 text-pink-600",
     type: "agent",
   },
 ];
 
 export default function WorkflowComponents({ switchToCanvas }: Props) {
+  const handleAddComponent = (item: typeof components[0]) => {
+    const existing = JSON.parse(localStorage.getItem("canvasNodes") || "[]");
+
+    const newNode = {
+      id: crypto.randomUUID(),
+      type: item.type,
+      x: 100 + existing.length * 30,
+      y: 100 + existing.length * 30,
+    };
+
+    existing.push(newNode);
+    localStorage.setItem("canvasNodes", JSON.stringify(existing));
+    
+    switchToCanvas();
+  };
+
   return (
-    <div className="flex-1 p-8 bg-gray-100">
-      <h1 className="text-xl font-semibold mb-6 text-gray-800">
-        Components
-      </h1>
+    <div className="flex-1 p-10 bg-[#F8FAFC] min-h-full">
+      <div className="max-w-5xl mx-auto">
+        <header className="mb-10">
+          <h1 className="text-2xl font-black text-slate-900 tracking-tight">
+            Workflow Components
+          </h1>
+          <p className="text-slate-500 text-sm mt-1">
+            Select a node type to add it to your current project canvas.
+          </p>
+        </header>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {components.map((item, index) => {
-          const Icon = item.icon;
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {components.map((item, index) => {
+            const Icon = item.icon;
 
-          return (
-            <div
-              key={index}
-              className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 flex gap-4 items-start hover:shadow-md transition"
-            >
+            return (
               <div
-                className={`w-14 h-14 flex items-center justify-center rounded-lg text-white bg-gradient-to-r ${item.color}`}
+                key={index}
+                className="group bg-white rounded-2xl border border-slate-200 p-6 flex flex-col justify-between hover:border-indigo-400 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1"
               >
-                <Icon size={28} />
-              </div>
+                <div>
+                  <div className={`w-12 h-12 flex items-center justify-center rounded-xl mb-4 transition-transform group-hover:scale-110 ${item.color}`}>
+                    <Icon size={24} strokeWidth={2.5} />
+                  </div>
 
-              <div className="flex-1">
-                <h2 className="font-semibold text-gray-800 text-lg">
-                  {item.title}
-                </h2>
+                  <h2 className="font-bold text-slate-800 text-lg mb-2">
+                    {item.title}
+                  </h2>
 
-                <p className="text-sm text-gray-500 mt-1">
-                  {item.description}
-                </p>
+                  <p className="text-sm text-slate-500 leading-relaxed mb-6">
+                    {item.description}
+                  </p>
+                </div>
 
                 <button
-                  onClick={() => {
-                    const existing = JSON.parse(
-                      localStorage.getItem("canvasNodes") || "[]"
-                    );
-
-                    const newNode = {
-                      id: crypto.randomUUID(),
-                      type: item.type,
-                      x: 200 + existing.length * 40,
-                      y: 150 + existing.length * 40,
-                    };
-
-                    existing.push(newNode);
-
-                    localStorage.setItem(
-                      "canvasNodes",
-                      JSON.stringify(existing)
-                    );
-
-                    // switch tab without reloading
-                    switchToCanvas();
-                  }}
-                  className="mt-4 bg-blue-600 hover:bg-blue-700 active:scale-95 transition-transform text-white text-sm px-4 py-2 rounded-md shadow"
+                  onClick={() => handleAddComponent(item)}
+                  className="flex items-center justify-center gap-2 w-full py-3 px-4 bg-slate-50 hover:bg-indigo-600 text-slate-600 hover:text-white font-bold text-xs uppercase tracking-widest rounded-xl transition-all active:scale-95"
                 >
-                  Drag to Canvas
+                  <Plus size={16} />
+                  Add to Canvas
                 </button>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
     </div>
   );

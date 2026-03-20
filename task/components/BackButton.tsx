@@ -8,7 +8,7 @@ export default function BackButton() {
 
   return (
     <motion.button
-      onClick={() => router.push("/rag-workflow")} // or router.back()
+      onClick={() => router.push("/rag-workflow")} 
       whileHover={{ x: -4 }}
       whileTap={{ scale: 0.95 }}
       className="group mb-6 flex items-center gap-2 text-slate-500 hover:text-indigo-600 font-bold transition-colors"

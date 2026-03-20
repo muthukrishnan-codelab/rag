@@ -125,7 +125,6 @@ export default function SignupPage() {
             </div>
           )}
 
-          {/* NAME */}
           <div className="relative mb-4">
             <User className="absolute left-3 top-3 text-gray-400" size={18} />
             <input
@@ -137,7 +136,6 @@ export default function SignupPage() {
             />
           </div>
 
-          {/* EMAIL */}
           <div className="relative mb-4">
             <Mail className="absolute left-3 top-3 text-gray-400" size={18} />
             <input
@@ -149,7 +147,6 @@ export default function SignupPage() {
             />
           </div>
 
-          {/* PASSWORD */}
           <div className="relative mb-4">
             <Lock className="absolute left-3 top-3 text-gray-400" size={18} />
             <input
@@ -169,7 +166,6 @@ export default function SignupPage() {
             </button>
           </div>
 
-          {/* CONFIRM PASSWORD */}
           <div className="relative mb-4">
             <Lock className="absolute left-3 top-3 text-gray-400" size={18} />
             <input
@@ -189,7 +185,6 @@ export default function SignupPage() {
             </button>
           </div>
 
-          {/* BUTTON */}
           <button
             onClick={handleSignup}
             className="w-full bg-yellow-400 text-black font-semibold py-3 rounded-md hover:bg-yellow-300 transition"

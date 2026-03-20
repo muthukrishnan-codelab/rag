@@ -44,7 +44,7 @@ const Item = ({ icon: Icon, label, type, collapsed }: ItemProps) => (
 
 return (
 <>
-{/* MOBILE HEADER */} <div className="lg:hidden flex items-center justify-between p-4 bg-zinc-950 border-b border-zinc-800 text-white"> <h2 className="font-semibold">Components</h2>
+<div className="lg:hidden flex items-center justify-between p-4 bg-zinc-950 border-b border-zinc-800 text-white"> <h2 className="font-semibold">Components</h2>
 <button onClick={() => setOpen(true)}> <Menu /> </button> </div>
 
 

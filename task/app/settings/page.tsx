@@ -1,80 +1,69 @@
 "use client";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   User, Bell, Lock, Shield, Palette, 
-  Globe, Mail, Save, Sparkles, ArrowLeft,
-  Smartphone, Eye, Languages, Fingerprint
+  Globe, Mail, Save, Fingerprint, Settings as SettingsIcon
 } from "lucide-react";
 
 type SettingTab = "profile" | "notifications" | "security" | "appearance";
 
 export default function SettingsPage() {
-  const router = useRouter();
   const [activeTab, setActiveTab] = useState<SettingTab>("profile");
 
   const tabs = [
-    { id: "profile", label: "Profile", icon: User, color: "text-indigo-600", bg: "bg-indigo-100/50", desc: "Personal information & public identity" },
-    { id: "notifications", label: "Notifications", icon: Bell, color: "text-amber-600", bg: "bg-amber-100/50", desc: "Manage alerts & email preferences" },
-    { id: "security", label: "Security", icon: Lock, color: "text-rose-600", bg: "bg-rose-100/50", desc: "Password, 2FA & session safety" },
-    { id: "appearance", label: "Appearance", icon: Palette, color: "text-emerald-600", bg: "bg-emerald-100/50", desc: "Theme, colors & interface settings" },
+    { id: "profile", label: "Profile", icon: User, color: "text-violet-400", bg: "bg-violet-500/10", desc: "Personal info & public identity" },
+    { id: "notifications", label: "Notifications", icon: Bell, color: "text-amber-400", bg: "bg-amber-500/10", desc: "Manage alerts & email" },
+    { id: "security", label: "Security", icon: Lock, color: "text-rose-400", bg: "bg-rose-500/10", desc: "Password & session safety" },
+    { id: "appearance", label: "Appearance", icon: Palette, color: "text-emerald-400", bg: "bg-emerald-500/10", desc: "Theme & interface settings" },
   ];
 
   return (
-    <div className="min-h-screen p-4 md:p-12 relative">
+    <div className="min-h-screen p-6 md:p-12 bg-black text-white relative overflow-hidden">
+      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-violet-600/10 blur-[120px] rounded-full pointer-events-none" />
+      
       <motion.div 
         initial={{ opacity: 0, y: 20 }} 
         animate={{ opacity: 1, y: 0 }} 
-        className="max-w-7xl mx-auto"
+        className="max-w-7xl mx-auto relative z-10"
       >
-        {/* Top Navigation Bar */}
         <div className="flex items-center justify-between mb-12">
-          <button 
-            onClick={() => router.push("/workflow-builder")}
-            className="flex items-center gap-3 text-slate-500 hover:text-indigo-600 font-bold transition-all group"
-          >
-            <div className="p-3 rounded-2xl bg-white/60 border border-white shadow-sm group-hover:shadow-md transition-all">
-              <ArrowLeft size={20} />
+          <div className="flex items-center gap-4">
+            <div className="p-3 rounded-2xl bg-violet-600/20 border border-violet-500/20 text-violet-400">
+              <SettingsIcon size={24} />
             </div>
-            <div className="flex flex-col items-start">
-              <span className="text-[10px] uppercase tracking-widest text-slate-400">Exit Settings</span>
-              <span className="text-sm">Back to Workflow</span>
+            <div>
+              <h1 className="text-4xl font-black tracking-tighter">Settings</h1>
+              <p className="text-slate-500 font-medium">Control your account environment.</p>
             </div>
-          </button>
+          </div>
 
-          <div className="hidden md:flex items-center gap-3 px-6 py-3 bg-white/40 border border-white/60 rounded-3xl backdrop-blur-md">
+          <div className="hidden md:flex items-center gap-3 px-6 py-3 bg-white/5 border border-white/10 rounded-3xl backdrop-blur-md">
              <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-             <span className="text-xs font-bold text-slate-600 uppercase tracking-tighter">System Synchronized</span>
+             <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">System Synchronized</span>
           </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           
-          {/* LEFT SIDE: Sidebar Navigation */}
-          <aside className="lg:col-span-4 space-y-6">
-            <div>
-              <h1 className="text-5xl font-black text-slate-900 tracking-tighter mb-2">Settings</h1>
-              <p className="text-slate-500 font-medium text-lg">Control your account environment.</p>
-            </div>
-
-            <nav className="space-y-3 mt-8">
+          <aside className="lg:col-span-4 space-y-3">
+            <nav className="space-y-3">
               {tabs.map((tab) => (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id as SettingTab)}
-                  className={`w-full flex items-start gap-4 p-5 rounded-[2rem] transition-all text-left relative overflow-hidden group ${
+                  className={`w-full flex items-start gap-4 p-5 rounded-[2rem] transition-all text-left relative overflow-hidden group border ${
                     activeTab === tab.id 
-                    ? "bg-slate-900 text-white shadow-2xl shadow-slate-300" 
-                    : "bg-white/40 hover:bg-white/80 text-slate-600 border border-white/50"
+                    ? "bg-violet-600 border-violet-500 text-white shadow-[0_20px_40px_rgba(139,92,246,0.2)]" 
+                    : "bg-white/[0.03] hover:bg-white/[0.08] text-slate-400 border-white/5"
                   }`}
                 >
-                  <div className={`p-3 rounded-2xl ${activeTab === tab.id ? "bg-white/10 text-white" : `${tab.bg} ${tab.color}`}`}>
+                  <div className={`p-3 rounded-2xl ${activeTab === tab.id ? "bg-white/20 text-white" : `${tab.bg} ${tab.color}`}`}>
                     <tab.icon size={22} />
                   </div>
                   <div className="flex flex-col">
                     <span className="font-bold text-lg">{tab.label}</span>
-                    <span className={`text-xs font-medium ${activeTab === tab.id ? "text-slate-400" : "text-slate-500"}`}>
+                    <span className={`text-xs font-medium ${activeTab === tab.id ? "text-violet-200" : "text-slate-500"}`}>
                       {tab.desc}
                     </span>
                   </div>
@@ -83,7 +72,6 @@ export default function SettingsPage() {
             </nav>
           </aside>
 
-          {/* RIGHT SIDE: Main Content Area */}
           <main className="lg:col-span-8">
             <AnimatePresence mode="wait">
               <motion.div
@@ -91,36 +79,34 @@ export default function SettingsPage() {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
-                className="backdrop-blur-3xl bg-white/70 border border-white shadow-[0_40px_80px_-15px_rgba(0,0,0,0.05)] rounded-[3.5rem] p-8 md:p-12 min-h-[600px] flex flex-col"
+                className="bg-white/[0.03] border border-white/10 backdrop-blur-3xl rounded-[3.5rem] p-8 md:p-12 min-h-[600px] flex flex-col shadow-2xl"
               >
-                {/* Profile Section */}
                 {activeTab === "profile" && (
                   <section className="space-y-10 flex-1">
-                    <div className="flex items-center gap-8 pb-10 border-b border-slate-200/50">
-                      <div className="w-24 h-24 rounded-full bg-gradient-to-tr from-indigo-500 to-blue-600 p-1">
-                        <div className="w-full h-full rounded-full bg-white flex items-center justify-center text-4xl font-black text-indigo-600">A</div>
+                    <div className="flex items-center gap-8 pb-10 border-b border-white/5">
+                      <div className="w-24 h-24 rounded-full bg-gradient-to-tr from-violet-500 to-purple-600 p-1 shadow-[0_0_30px_rgba(139,92,246,0.3)]">
+                        <div className="w-full h-full rounded-full bg-black flex items-center justify-center text-4xl font-black text-violet-400">A</div>
                       </div>
                       <div>
-                        <h2 className="text-3xl font-black text-slate-900">User Profile</h2>
-                        <p className="text-slate-500 font-medium">Update your photo and personal details.</p>
+                        <h2 className="text-3xl font-black text-white">User Profile</h2>
+                        <p className="text-slate-400 font-medium">Update your photo and personal details.</p>
                       </div>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                      <InputBlock label="Display Name" value="Admin User" icon={<User size={18}/>} />
-                      <InputBlock label="Email Address" value="admin@workflow.ai" icon={<Mail size={18}/>} />
-                      <InputBlock label="Professional Role" value="Lead Architect" />
-                      <InputBlock label="Timezone" value="UTC -05:00 Eastern Time" icon={<Globe size={18}/>} />
+                      <InputBlock label="Display Name" value="Web Dev Intern" icon={<User size={18}/>} />
+                      <InputBlock label="Email Address" value="intern@aanseaa.com" icon={<Mail size={18}/>} />
+                      <InputBlock label="Professional Role" value="Fullstack Developer" />
+                      <InputBlock label="Timezone" value="India Standard Time (IST)" icon={<Globe size={18}/>} />
                     </div>
                   </section>
                 )}
 
-                {/* Security Section (Example of variety) */}
                 {activeTab === "security" && (
                   <section className="space-y-10 flex-1">
-                    <div className="pb-10 border-b border-slate-200/50">
-                      <h2 className="text-3xl font-black text-slate-900">Security & Privacy</h2>
-                      <p className="text-slate-500 font-medium">Manage your password and authentication.</p>
+                    <div className="pb-10 border-b border-white/5">
+                      <h2 className="text-3xl font-black text-white">Security & Privacy</h2>
+                      <p className="text-slate-400 font-medium">Manage your password and authentication.</p>
                     </div>
 
                     <div className="space-y-4">
@@ -130,12 +116,11 @@ export default function SettingsPage() {
                   </section>
                 )}
 
-                {/* Footer Buttons */}
-                <div className="mt-12 pt-8 border-t border-slate-200/50 flex flex-col md:flex-row justify-between items-center gap-4">
-                  <p className="text-slate-400 text-xs font-bold uppercase tracking-widest">Last changes saved 2m ago</p>
+                <div className="mt-auto pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
+                  <p className="text-slate-500 text-[10px] font-black uppercase tracking-widest">Last synced 2m ago</p>
                   <div className="flex gap-4 w-full md:w-auto">
-                    <button className="flex-1 md:flex-none px-8 py-4 rounded-2xl font-bold text-slate-500 hover:bg-slate-100 transition-all">Discard</button>
-                    <button className="flex-1 md:flex-none px-12 py-4 rounded-2xl font-black bg-slate-900 text-white hover:bg-indigo-600 shadow-xl shadow-indigo-100 transition-all active:scale-95 flex items-center justify-center gap-2">
+                    <button className="flex-1 md:flex-none px-8 py-4 rounded-2xl font-bold text-slate-400 hover:text-white transition-all">Discard</button>
+                    <button className="flex-1 md:flex-none px-12 py-4 rounded-2xl font-black bg-violet-600 text-white hover:bg-violet-500 shadow-xl shadow-violet-900/20 transition-all active:scale-95 flex items-center justify-center gap-2">
                       <Save size={18} />
                       Save Settings
                     </button>
@@ -150,16 +135,15 @@ export default function SettingsPage() {
   );
 }
 
-/* UI Helper Components */
 function InputBlock({ label, value, icon }: { label: string; value: string; icon?: any }) {
   return (
     <div className="space-y-2 group">
-      <label className="text-[10px] font-black uppercase text-slate-400 tracking-widest ml-1">{label}</label>
+      <label className="text-[10px] font-black uppercase text-slate-500 tracking-widest ml-1">{label}</label>
       <div className="relative">
-        {icon && <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300 group-focus-within:text-indigo-500 transition-colors">{icon}</div>}
+        {icon && <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-violet-400 transition-colors">{icon}</div>}
         <input 
           defaultValue={value}
-          className={`w-full ${icon ? 'pl-12' : 'px-5'} py-4 bg-slate-50/50 border border-slate-200 rounded-2xl font-semibold text-slate-700 outline-none focus:bg-white focus:ring-4 focus:ring-indigo-500/5 focus:border-indigo-500 transition-all`} 
+          className={`w-full ${icon ? 'pl-12' : 'px-5'} py-4 bg-white/5 border border-white/10 rounded-2xl font-semibold text-white outline-none focus:bg-white/10 focus:ring-4 focus:ring-violet-500/10 focus:border-violet-500 transition-all`} 
         />
       </div>
     </div>
@@ -168,15 +152,15 @@ function InputBlock({ label, value, icon }: { label: string; value: string; icon
 
 function ToggleOption({ title, desc, icon, active }: { title: string; desc: string; icon: any, active: boolean }) {
   return (
-    <div className="flex items-center justify-between p-6 bg-slate-50/50 rounded-3xl border border-slate-100 hover:border-slate-200 transition-all group">
+    <div className="flex items-center justify-between p-6 bg-white/[0.02] rounded-3xl border border-white/5 hover:border-violet-500/30 transition-all group">
       <div className="flex gap-4 items-center">
-        <div className="p-3 bg-white rounded-xl text-slate-400 group-hover:text-indigo-500 shadow-sm transition-colors">{icon}</div>
+        <div className="p-3 bg-white/5 rounded-xl text-slate-400 group-hover:text-violet-400 shadow-sm transition-colors">{icon}</div>
         <div>
-          <h4 className="font-bold text-slate-900">{title}</h4>
+          <h4 className="font-bold text-white">{title}</h4>
           <p className="text-sm text-slate-500 font-medium">{desc}</p>
         </div>
-      </div>
-      <div className={`w-12 h-7 rounded-full transition-all relative ${active ? 'bg-indigo-600' : 'bg-slate-300'}`}>
+        </div>
+      <div className={`w-12 h-7 rounded-full transition-all relative cursor-pointer ${active ? 'bg-violet-600' : 'bg-white/10'}`}>
         <div className={`absolute top-1 w-5 h-5 bg-white rounded-full transition-all ${active ? 'right-1' : 'left-1'}`} />
       </div>
     </div>

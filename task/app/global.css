@@ -11,7 +11,6 @@ body {
     'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
     'Open Sans', 'Helvetica Neue', sans-serif;
   
-  /* Applying the light animated gradient to the whole site */
   background: linear-gradient(
     -45deg, 
     #f8fafc, 
@@ -35,7 +34,6 @@ body {
   }
 }
 
-/* Use this class for specific sections that need a more visible light glow */
 .animated-gradient {
   background: linear-gradient(
     130deg,
@@ -48,7 +46,6 @@ body {
   animation: gradientMove 10s ease infinite;
 }
 
-/* Optional: Smoother transitions for all components */
 * {
   transition: border-color 0.2s ease, background-color 0.2s ease;
 }
