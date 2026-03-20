@@ -1,51 +1,34 @@
-🌀 RAG-Flow: Professional Workflow Orchestrator
-RAG-Flow is a modern, high-performance web application designed for building and managing Retrieval-Augmented Generation (RAG) pipelines. It features a drag-and-drop canvas, real-time node configuration, and a comprehensive intelligence dashboard.
+🌀 RAG-Flow: AI Workflow Orchestrator
+-
+A high-performance interface for building, managing, and monitoring Retrieval-Augmented Generation (RAG) pipelines. Built with Next.js 14, Tailwind CSS, and Framer Motion.
 
-🚀 Key Features
-Interactive Workflow Canvas: A custom-built, zoomable node-based editor for orchestrating AI logic.
+Core Features
+-
+-Visual Canvas: A drag-and-drop environment for designing node-based AI workflows. Includes native zoom, pan, and role-based editing permissions.
 
-Intelligence Dashboard: Monitor pipeline faithfulness, retrieval hit rates, and document ingestion status in real-time.
+-RAG Analytics Dashboard: Real-time monitoring of pipeline performance, including Retrieval Hit Rate, Faithfulness (Hallucination tracking), and Context Precision.
 
-Adaptive UI: Modern "Glassmorphism" aesthetic with collapsible sidebars and sliding settings panels.
+-Intelligent Ingestion: Track document processing, chunking status, and vector synchronization directly from the UI.
 
-RAG Optimization: Specialized metrics for monitoring context precision, recall, and LLM hallucination rates.
+-Sliding Node Settings: Context-aware configuration panel for fine-tuning LLM parameters (Temperature, Top-K, Max Tokens) without leaving the canvas.
 
-Role-Based Access: Integrated AuthGuard with specific permissions for Admins and Viewers.
+-AuthGuard Security: Role-aware navigation and action masking for Admin and Viewer roles.
 
-🛠️ Tech Stack
-Frontend: React 18, Next.js 14 (App Router)
+🏗️ Technical Architecture
+-
+i)Fontend: React 18 / Next.js 14 (App Router)
+ii)Styling: Tailwind CSS (Modern Dark/Glassmorphism UI)
+iii)Motion: Framer Motion for 60fps transitions and sliding panels
+iv)Icons: Lucide React
+v)State: React Hooks & Context API for canvas node persistence
 
-Styling: Tailwind CSS
-
-Animations: Framer Motion
-
-Icons: Lucide React
-
-State Management: React Hooks (useState, useEffect, useRef)
-
-📂 Project Structure
+🛠️ Installation & Setup
 Bash
-├── app/
-│   ├── dashboard/          # RAG Analytics & Metrics
-│   ├── workflow-builder/   # Core Canvas & Node logic
-│   └── layout.tsx          # Global providers & AuthGuard
-├── components/
-│   ├── layout/             # Sidebar, Navbar, NodeSettings
-│   └── ui/                 # Reusable interface components
-└── public/                 # Static assets & icons
-
-🚦 Getting Started
-Clone the repository:
-
-Bash
+# Clone the repository
 git clone https://github.com/your-username/rag-flow.git
-Install dependencies:
 
-Bash
+# Install dependencies
 npm install
-Run the development server:
 
-Bash
+# Start development server
 npm run dev
-Open the app:
-Navigate to http://localhost:3000 to see the dashboard.
